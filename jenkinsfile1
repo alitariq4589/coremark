@@ -1,0 +1,58 @@
+node ("qemuusermode_runner2"){
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make single core ***'){
+    make -j1 PORT_DIR=linux/
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make double core ***'){
+    make -j2 PORT_DIR=linux/
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make 4 cores ***'){
+    make -j4 PORT_DIR=linux/
+  }
+}
+node ("riscv64_runner1"){
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make single core ***'){
+    make -j1 PORT_DIR=linux/ RUN=""
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make double core ***'){
+    make -j2 PORT_DIR=linux/ RUN=""
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make 4 cores ***'){
+    make -j4 PORT_DIR=linux/ RUN=""
+  }
+}
