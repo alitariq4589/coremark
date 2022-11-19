@@ -21,7 +21,7 @@
 OUTFLAG= -o
 # Flag: CC
 #	Use this flag to define compiler to use
-CC?= cc
+CC=riscv64-unknown-linux-gnu-gcc
 # Flag: CFLAGS
 #	Use this flag to define compiler options. Note, you can add compiler options from the command line using XCFLAGS="other flags"
 PORT_CFLAGS = -O2
@@ -62,17 +62,17 @@ EXTRA_DEPENDS += posix/core_portme.mak
 
 #For native compilation and execution
 LOAD = echo Loading done
-RUN = 
+RUN = qemu-riscv64 -L "$$RISCV_SYSROOT"
 
 OEXT = .o
-EXE = .exe
+EXE =
 
 # Flag: SEPARATE_COMPILE
 # Define if you need to separate compilation from link stage. 
 # In this case, you also need to define below how to create an object file, and how to link.
 ifdef SEPARATE_COMPILE
 
-LD		= gcc
+LD		= riscv64-unknown-linux-gnu-ld
 OBJOUT 	= -o
 LFLAGS 	=
 OFLAG 	= -o
