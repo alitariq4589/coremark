@@ -6,7 +6,9 @@ node ("qemuusermode_runner2"){
     checkout scm
   }
   stage('*** make single core ***'){
-    make -j1 PORT_DIR=linux/
+    sh'''#!/bin/bash
+      make -j1 PORT_DIR=linux/
+    '''
   }
   stage('*** Cleanup ***'){
     cleanWs()
@@ -15,7 +17,9 @@ node ("qemuusermode_runner2"){
     checkout scm
   }
   stage('*** make double core ***'){
-    make -j2 PORT_DIR=linux/
+    sh'''#!/bin/bash
+      make -j2 PORT_DIR=linux/
+    '''
   }
   stage('*** Cleanup ***'){
     cleanWs()
@@ -24,7 +28,9 @@ node ("qemuusermode_runner2"){
     checkout scm
   }
   stage('*** make 4 cores ***'){
-    make -j4 PORT_DIR=linux/
+    sh'''#!/bin/bash
+      make -j4 PORT_DIR=linux/
+    '''
   }
 }
 node ("riscv64_runner1"){
@@ -35,7 +41,9 @@ node ("riscv64_runner1"){
     checkout scm
   }
   stage('*** make single core ***'){
-    make -j1 PORT_DIR=linux/ RUN=""
+    sh'''#!/bin/bash
+      make -j1 PORT_DIR=linux/ RUN=""
+    '''
   }
   stage('*** Cleanup ***'){
     cleanWs()
@@ -44,7 +52,9 @@ node ("riscv64_runner1"){
     checkout scm
   }
   stage('*** make double core ***'){
-    make -j2 PORT_DIR=linux/ RUN=""
+    sh'''#!/bin/bash
+      make -j2 PORT_DIR=linux/ RUN=""
+    '''
   }
   stage('*** Cleanup ***'){
     cleanWs()
@@ -53,6 +63,8 @@ node ("riscv64_runner1"){
     checkout scm
   }
   stage('*** make 4 cores ***'){
-    make -j4 PORT_DIR=linux/ RUN=""
+    sh'''#!/bin/bash
+      make -j4 PORT_DIR=linux/ RUN=""
+    '''
   }
 }
