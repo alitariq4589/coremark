@@ -8,6 +8,7 @@ node ("qemuusermode_runner2"){
   stage('*** make single core ***'){
     sh'''#!/bin/bash
       make -j1 PORT_DIR=linux/
+      echo $BUILD_NUMBER
     '''
   }
   stage('*** Cleanup ***'){
