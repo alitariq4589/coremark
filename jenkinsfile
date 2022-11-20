@@ -1,16 +1,16 @@
 node ("x86_runner2"){
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup x86 ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make single core ***'){
+  stage('*** make -j1 x86 ***'){
     sh'''#!/bin/bash
       make -j1 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results x86 ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 single core"
       cat run1.log
@@ -18,18 +18,18 @@ node ("x86_runner2"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup x86 ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make double core ***'){
+  stage('*** make -j2 x86 ***'){
     sh'''#!/bin/bash
       make -j2 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results x86 ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 two cores"
       cat run1.log
@@ -37,18 +37,18 @@ node ("x86_runner2"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup x86 ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make 4 cores ***'){
+  stage('*** make -j4 x86 ***'){
     sh'''#!/bin/bash
       make -j4 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results x86 ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 four cores"
       cat run1.log
@@ -58,18 +58,18 @@ node ("x86_runner2"){
   }
 }
 node ("qemuusermode_runner2"){
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu usermode ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu usermode***'){
     checkout scm
   }
-  stage('*** make single core ***'){
+  stage('*** make -j1 qemu usermode ***'){
     sh'''#!/bin/bash
       make -j1 PORT_DIR=linux/
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu usermode ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode single core"
       cat run1.log
@@ -77,18 +77,18 @@ node ("qemuusermode_runner2"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu usermode***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu usermode ***'){
     checkout scm
   }
-  stage('*** make double core ***'){
+  stage('*** make -j2 qemu usermode ***'){
     sh'''#!/bin/bash
       make -j2 PORT_DIR=linux/
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu usermode ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode two cores"
       cat run1.log
@@ -96,18 +96,18 @@ node ("qemuusermode_runner2"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu usermode ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu usermode ***'){
     checkout scm
   }
-  stage('*** make 4 cores ***'){
+  stage('*** make -j4 qemu usermode ***'){
     sh'''#!/bin/bash
       make -j4 PORT_DIR=linux/
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu usermode ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode four cores"
       cat run1.log
@@ -117,18 +117,18 @@ node ("qemuusermode_runner2"){
   }
 }
 node ("riscv64_runner1"){
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu linux ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu linux ***'){
     checkout scm
   }
-  stage('*** make single core ***'){
+  stage('*** make -j1 qemu linux ***'){
     sh'''#!/bin/bash
       make -j1 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu linux ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux single core"
       cat run1.log
@@ -136,18 +136,18 @@ node ("riscv64_runner1"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu linux ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu linux ***'){
     checkout scm
   }
-  stage('*** make double core ***'){
+  stage('*** make -j2 qemu linux ***'){
     sh'''#!/bin/bash
       make -j2 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu linux ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux two core"
       cat run1.log
@@ -155,18 +155,18 @@ node ("riscv64_runner1"){
       cat run2.log
     '''
   }
-  stage('*** Cleanup ***'){
+  stage('*** Cleanup qemu linux ***'){
     cleanWs()
   }
-  stage('*** Checkout SCM ***'){
+  stage('*** Checkout SCM qemu linux***'){
     checkout scm
   }
-  stage('*** make 4 cores ***'){
+  stage('*** make -j4 qemu linux ***'){
     sh'''#!/bin/bash
       make -j4 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results ***'){
+  stage ('*** Printing Results qemu linux ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux four core"
       cat run1.log
