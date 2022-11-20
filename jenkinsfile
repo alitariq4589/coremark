@@ -52,7 +52,7 @@ node ("x86_runner2"){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 four cores"
       cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for x86_64cd four cores"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for x86_64 four cores"
       cat run2.log
     '''
   }
