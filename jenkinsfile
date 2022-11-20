@@ -8,9 +8,17 @@ node ("qemuusermode_runner2"){
   stage('*** make single core ***'){
     sh'''#!/bin/bash
       make -j1 PORT_DIR=linux/
-      echo $BUILD_NUMBER
     '''
   }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode single core"
+      cat run2.log
+    '''
+  }
+}
   stage('*** Cleanup ***'){
     cleanWs()
   }
@@ -20,6 +28,14 @@ node ("qemuusermode_runner2"){
   stage('*** make double core ***'){
     sh'''#!/bin/bash
       make -j2 PORT_DIR=linux/
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode two cores"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode two cores"
+      cat run2.log
     '''
   }
   stage('*** Cleanup ***'){
@@ -33,6 +49,14 @@ node ("qemuusermode_runner2"){
       make -j4 PORT_DIR=linux/
     '''
   }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode four cores"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode four cores"
+      cat run2.log
+    '''
+  }
 }
 node ("riscv64_runner1"){
   stage('*** Cleanup ***'){
@@ -43,7 +67,15 @@ node ("riscv64_runner1"){
   }
   stage('*** make single core ***'){
     sh'''#!/bin/bash
-      make -j1 PORT_DIR=linux/ RUN=""
+      make -j1 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux single core"
+      cat run2.log
     '''
   }
   stage('*** Cleanup ***'){
@@ -54,7 +86,15 @@ node ("riscv64_runner1"){
   }
   stage('*** make double core ***'){
     sh'''#!/bin/bash
-      make -j2 PORT_DIR=linux/ RUN=""
+      make -j2 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux two core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux two core"
+      cat run2.log
     '''
   }
   stage('*** Cleanup ***'){
@@ -65,7 +105,15 @@ node ("riscv64_runner1"){
   }
   stage('*** make 4 cores ***'){
     sh'''#!/bin/bash
-      make -j4 PORT_DIR=linux/ RUN=""
+      make -j4 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux four core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux four core"
+      cat run2.log
     '''
   }
 }
