@@ -18,7 +18,6 @@ node ("qemuusermode_runner2"){
       cat run2.log
     '''
   }
-}
   stage('*** Cleanup ***'){
     cleanWs()
   }
