@@ -2,6 +2,9 @@ node ("x86_runner2"){
   stage('*** Cleanup x86 ***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
@@ -21,6 +24,9 @@ node ("x86_runner2"){
   stage('*** Cleanup x86 ***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
@@ -39,6 +45,9 @@ node ("x86_runner2"){
   }
   stage('*** Cleanup x86 ***'){
     cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM x86 ***'){
     checkout scm
@@ -61,6 +70,9 @@ node ("qemuusermode_runner2"){
   stage('*** Cleanup qemu usermode ***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM qemu usermode***'){
     checkout scm
   }
@@ -80,6 +92,9 @@ node ("qemuusermode_runner2"){
   stage('*** Cleanup qemu usermode***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM qemu usermode ***'){
     checkout scm
   }
@@ -98,6 +113,9 @@ node ("qemuusermode_runner2"){
   }
   stage('*** Cleanup qemu usermode ***'){
     cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM qemu usermode ***'){
     checkout scm
@@ -120,6 +138,9 @@ node ("riscv64_runner1"){
   stage('*** Cleanup qemu linux ***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM qemu linux ***'){
     checkout scm
   }
@@ -139,6 +160,9 @@ node ("riscv64_runner1"){
   stage('*** Cleanup qemu linux ***'){
     cleanWs()
   }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
   stage('*** Checkout SCM qemu linux ***'){
     checkout scm
   }
@@ -157,6 +181,9 @@ node ("riscv64_runner1"){
   }
   stage('*** Cleanup qemu linux ***'){
     cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM qemu linux***'){
     checkout scm
