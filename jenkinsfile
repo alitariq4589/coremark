@@ -1,3 +1,62 @@
+node ("x86_runner2"){
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make single core ***'){
+    sh'''#!/bin/bash
+      make -j1 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for x86_64 single core"
+      cat run2.log
+    '''
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make double core ***'){
+    sh'''#!/bin/bash
+      make -j2 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 two cores"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for x86_64 two cores"
+      cat run2.log
+    '''
+  }
+  stage('*** Cleanup ***'){
+    cleanWs()
+  }
+  stage('*** Checkout SCM ***'){
+    checkout scm
+  }
+  stage('*** make 4 cores ***'){
+    sh'''#!/bin/bash
+      make -j4 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Printing Results ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for x86_64 four cores"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for x86_64cd four cores"
+      cat run2.log
+    '''
+  }
+}
 node ("qemuusermode_runner2"){
   stage('*** Cleanup ***'){
     cleanWs()
