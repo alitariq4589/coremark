@@ -10,7 +10,7 @@ node ("x86_runner2"){
   }
   stage('*** make -j1 x86 ***'){
     sh'''#!/bin/bash
-      make -j20 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j1 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results x86 ***'){
