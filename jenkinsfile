@@ -10,7 +10,7 @@ node ("x86_runner2"){
   }
   stage('*** make -j1 x86 ***'){
     sh'''#!/bin/bash
-      make -j20 CC=gcc PORT_DIR=linux/ RUN=
+      make -j20 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results x86 ***'){
@@ -32,7 +32,7 @@ node ("x86_runner2"){
   }
   stage('*** make -j2 x86 ***'){
     sh'''#!/bin/bash
-      make -j2 CC=gcc PORT_DIR=linux/ RUN=
+      make -j2 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results x86 ***'){
@@ -54,7 +54,7 @@ node ("x86_runner2"){
   }
   stage('*** make -j4 x86 ***'){
     sh'''#!/bin/bash
-      make -j4 CC=gcc PORT_DIR=linux/ RUN=
+      make -j4 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results x86 ***'){
@@ -78,7 +78,7 @@ node ("qemuusermode_runner2"){
   }
   stage('*** make -j1 qemu usermode ***'){
     sh'''#!/bin/bash
-      make -j1 PORT_DIR=linux/
+      make ITERATIONS=300000 -j1 PORT_DIR=linux/
     '''
   }
   stage ('*** Printing Results qemu usermode ***'){
@@ -100,7 +100,7 @@ node ("qemuusermode_runner2"){
   }
   stage('*** make -j2 qemu usermode ***'){
     sh'''#!/bin/bash
-      make -j2 PORT_DIR=linux/
+      make ITERATIONS=300000 -j2 PORT_DIR=linux/
     '''
   }
   stage ('*** Printing Results qemu usermode ***'){
@@ -122,7 +122,7 @@ node ("qemuusermode_runner2"){
   }
   stage('*** make -j4 qemu usermode ***'){
     sh'''#!/bin/bash
-      make -j4 PORT_DIR=linux/
+      make ITERATIONS=300000 -j4 PORT_DIR=linux/
     '''
   }
   stage ('*** Printing Results qemu usermode ***'){
@@ -146,7 +146,7 @@ node ("riscv64_runner1"){
   }
   stage('*** make -j1 qemu linux ***'){
     sh'''#!/bin/bash
-      make -j1 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 -j1 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results qemu linux ***'){
@@ -168,7 +168,7 @@ node ("riscv64_runner1"){
   }
   stage('*** make -j2 qemu linux ***'){
     sh'''#!/bin/bash
-      make -j2 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 -j2 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results qemu linux ***'){
@@ -190,7 +190,7 @@ node ("riscv64_runner1"){
   }
   stage('*** make -j4 qemu linux ***'){
     sh'''#!/bin/bash
-      make -j4 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 -j4 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results qemu linux ***'){
