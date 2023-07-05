@@ -33,139 +33,292 @@ node ("sf1-1"){
     cleanWs()
   }
 }
-node ("qemuusermode_runner2"){
-  stage('*** Cleanup qemu usermode ***'){
+
+
+node ("sf1-2"){
+  stage('*** Cleanup sf1-2 ***'){
     cleanWs()
   }
   stage ('*** 30s Sleep ***'){
     sleep(time:30,unit:"SECONDS")
   }
-  stage('*** Checkout SCM qemu usermode***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make -j1 qemu usermode ***'){
+  stage('*** make sf1-2 ***'){
     sh'''#!/bin/bash
-      make ITERATIONS=300000 -j1 PORT_DIR=linux/
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results qemu usermode ***'){
+  stage ('*** Print Results sf1-2 ***'){
     sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode single core"
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-2 single core"
       cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode single core"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-2 single core"
       cat run2.log
     '''
   }
-  stage('*** Cleanup qemu usermode***'){
+  stage ('*** Printing results to csv file sf1-2 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf1-2 ***'){
     cleanWs()
-  }
-  stage ('*** 30s Sleep ***'){
-    sleep(time:30,unit:"SECONDS")
-  }
-  stage('*** Checkout SCM qemu usermode ***'){
-    checkout scm
-  }
-  stage('*** make -j2 qemu usermode ***'){
-    sh'''#!/bin/bash
-      make ITERATIONS=300000 -j2 PORT_DIR=linux/
-    '''
-  }
-  stage ('*** Printing Results qemu usermode ***'){
-    sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode two cores"
-      cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode two cores"
-      cat run2.log
-    '''
-  }
-  stage('*** Cleanup qemu usermode ***'){
-    cleanWs()
-  }
-  stage ('*** 30s Sleep ***'){
-    sleep(time:30,unit:"SECONDS")
-  }
-  stage('*** Checkout SCM qemu usermode ***'){
-    checkout scm
-  }
-  stage('*** make -j4 qemu usermode ***'){
-    sh'''#!/bin/bash
-      make ITERATIONS=300000 -j4 PORT_DIR=linux/
-    '''
-  }
-  stage ('*** Printing Results qemu usermode ***'){
-    sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemuusermode four cores"
-      cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemuusermode four cores"
-      cat run2.log
-    '''
   }
 }
-node ("riscv64_runner1"){
-  stage('*** Cleanup qemu linux ***'){
+
+node ("sf1-3"){
+  stage('*** Cleanup sf1-3 ***'){
     cleanWs()
   }
   stage ('*** 30s Sleep ***'){
     sleep(time:30,unit:"SECONDS")
   }
-  stage('*** Checkout SCM qemu linux ***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make -j1 qemu linux ***'){
+  stage('*** make sf1-3 ***'){
     sh'''#!/bin/bash
-      make ITERATIONS=300000 -j1 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results qemu linux ***'){
+  stage ('*** Print Results sf1-3 ***'){
     sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux single core"
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-3 single core"
       cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux single core"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-3 single core"
       cat run2.log
     '''
   }
-  stage('*** Cleanup qemu linux ***'){
+  stage ('*** Printing results to csv file sf1-3 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf1-3 ***'){
+    cleanWs()
+  }
+}
+
+node ("sf2-1"){
+  stage('*** Cleanup sf2-1 ***'){
     cleanWs()
   }
   stage ('*** 30s Sleep ***'){
     sleep(time:30,unit:"SECONDS")
   }
-  stage('*** Checkout SCM qemu linux ***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make -j2 qemu linux ***'){
+  stage('*** make sf2-1 ***'){
     sh'''#!/bin/bash
-      make ITERATIONS=300000 -j2 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results qemu linux ***'){
+  stage ('*** Print Results sf2-1 ***'){
     sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux two core"
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-1 single core"
       cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux two core"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-1 single core"
       cat run2.log
     '''
   }
-  stage('*** Cleanup qemu linux ***'){
+  stage ('*** Printing results to csv file sf2-1 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf2-1 ***'){
+    cleanWs()
+  }
+}
+
+node ("sf2-2"){
+  stage('*** Cleanup sf2-2 ***'){
     cleanWs()
   }
   stage ('*** 30s Sleep ***'){
     sleep(time:30,unit:"SECONDS")
   }
-  stage('*** Checkout SCM qemu linux***'){
+  stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make -j4 qemu linux ***'){
+  stage('*** make sf2-2 ***'){
     sh'''#!/bin/bash
-      make ITERATIONS=300000 -j4 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results qemu linux ***'){
+  stage ('*** Print Results sf2-2 ***'){
     sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for qemu linux four core"
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-2 single core"
       cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for qemu linux four core"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-2 single core"
       cat run2.log
     '''
+  }
+  stage ('*** Printing results to csv file sf2-2 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf2-2 ***'){
+    cleanWs()
+  }
+}
+
+node ("sf2-3"){
+  stage('*** Cleanup sf2-3 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM x86 ***'){
+    checkout scm
+  }
+  stage('*** make sf2-3 ***'){
+    sh'''#!/bin/bash
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Print Results sf2-3 ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-3 single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-3 single core"
+      cat run2.log
+    '''
+  }
+  stage ('*** Printing results to csv file sf2-3 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf2-3 ***'){
+    cleanWs()
+  }
+}
+
+node ("sf2-4"){
+  stage('*** Cleanup sf2-4 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM x86 ***'){
+    checkout scm
+  }
+  stage('*** make sf2-4 ***'){
+    sh'''#!/bin/bash
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Print Results sf2-4 ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-4 single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-4 single core"
+      cat run2.log
+    '''
+  }
+  stage ('*** Printing results to csv file sf2-4 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup sf2-4 ***'){
+    cleanWs()
+  }
+}
+
+node ("unleashed1-1"){
+  stage('*** Cleanup unleashed1-1 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM x86 ***'){
+    checkout scm
+  }
+  stage('*** make unleashed1-1 ***'){
+    sh'''#!/bin/bash
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Print Results unleashed1-1 ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for unleashed1-1 single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for unleashed1-1 single core"
+      cat run2.log
+    '''
+  }
+  stage ('*** Printing results to csv file unleashed1-1 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup unleashed1-1 ***'){
+    cleanWs()
+  }
+}
+
+node ("unleashed1-2"){
+  stage('*** Cleanup unleashed1-2 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM x86 ***'){
+    checkout scm
+  }
+  stage('*** make unleashed1-2 ***'){
+    sh'''#!/bin/bash
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+    '''
+  }
+  stage ('*** Print Results unleashed1-2 ***'){
+    sh '''
+      echo -e "[jenkinsfile INFO]: Printing run1.log for unleashed1-2 single core"
+      cat run1.log
+      echo -e "[jenkinsfile INFO]: Printing run2.log for unleashed1-2 single core"
+      cat run2.log
+    '''
+  }
+  stage ('*** Printing results to csv file unleashed1-2 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    '''
+  }
+  stage('*** Cleanup unleashed1-2 ***'){
+    cleanWs()
   }
 }
