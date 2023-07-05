@@ -8,9 +8,9 @@ node ("sf1-1"){
   stage('*** Checkout SCM x86 ***'){
     checkout scm
   }
-  stage('*** make -j1 sf1-1 ***'){
+  stage('*** make sf1-1 ***'){
     sh'''#!/bin/bash
-      make -j1 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
   stage ('*** Printing Results sf1-1 ***'){
@@ -24,48 +24,7 @@ node ("sf1-1"){
   stage('*** Cleanup sf1-1 ***'){
     cleanWs()
   }
-  stage ('*** 30s Sleep ***'){
-    sleep(time:30,unit:"SECONDS")
-  }
-  stage('*** Checkout SCM sf1-1 ***'){
-    checkout scm
-  }
-  stage('*** make -j2 sf1-1 ***'){
-    sh'''#!/bin/bash
-      make -j2 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
-    '''
-  }
-  stage ('*** Printing Results sf1-1 ***'){
-    sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-1 two cores"
-      cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-1 two cores"
-      cat run2.log
-    '''
-  }
-  stage('*** Cleanup x86 ***'){
-    cleanWs()
-  }
-  stage ('*** 30s Sleep ***'){
-    sleep(time:30,unit:"SECONDS")
-  }
-  stage('*** Checkout SCM sf1-1 ***'){
-    checkout scm
-  }
-  stage('*** make -j4 sf1-1 ***'){
-    sh'''#!/bin/bash
-      make -j4 ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
-    '''
-  }
-  stage ('*** Printing Results sf1-1 ***'){
-    sh '''
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-1 four cores"
-      cat run1.log
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-1 four cores"
-      cat run2.log
-    '''
-  }
-}
+  
 node ("qemuusermode_runner2"){
   stage('*** Cleanup qemu usermode ***'){
     cleanWs()
