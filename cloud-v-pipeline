@@ -24,7 +24,7 @@ node ("sf1-1"){
   stage('*** Cleanup sf1-1 ***'){
     cleanWs()
   }
-  
+}
 node ("qemuusermode_runner2"){
   stage('*** Cleanup qemu usermode ***'){
     cleanWs()
