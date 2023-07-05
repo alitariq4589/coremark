@@ -13,12 +13,20 @@ node ("sf1-1"){
       make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
     '''
   }
-  stage ('*** Printing Results sf1-1 ***'){
+  stage ('*** Print Results sf1-1 ***'){
     sh '''
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-1 single core"
       cat run1.log
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-1 single core"
       cat run2.log
+    '''
+  }
+  stage ('*** Printing results to csv file sf1-1 ***'){
+    sh '''
+      # Printing to run1.csv
+      echo -n $(awk '{print $4}' ./run1.log | cut -f2 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f3 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $4}' ./run1.log | cut -f4 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f5 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n $(awk '{print $3}' ./run1.log | cut -f6 -d$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n $(awk '{print $4}' ./run2.log | cut -f2 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f3 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $4}' ./run2.log | cut -f4 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f5 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n $(awk '{print $3}' ./run2.log | cut -f6 -d$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
     '''
   }
   stage('*** Cleanup sf1-1 ***'){
