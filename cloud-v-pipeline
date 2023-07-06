@@ -6,7 +6,7 @@ node ("sf1-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
-    sh """
+    sh"git clone https://github.com/alitariq4589/coremark.git ."
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
@@ -43,7 +43,7 @@ node ("sf1-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-2 ***'){
-    sh """
+    sh"git clone https://github.com/alitariq4589/coremark.git ."
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
