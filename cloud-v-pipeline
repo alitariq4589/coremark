@@ -6,7 +6,11 @@ node ("sf1-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
@@ -43,7 +47,11 @@ node ("sf1-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-2 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
@@ -79,7 +87,11 @@ node ("sf1-3"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-3 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
@@ -115,7 +127,11 @@ node ("sf2-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-1 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
@@ -151,7 +167,11 @@ node ("sf2-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-2 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
@@ -187,7 +207,11 @@ node ("sf2-3"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-3 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
@@ -223,7 +247,11 @@ node ("sf2-4"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-4 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
@@ -259,7 +287,11 @@ node ("unleashed1-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-1 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
@@ -295,7 +327,11 @@ node ("unleashed1-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-2 ***'){
-    sh"git clone https://github.com/alitariq4589/coremark.git ."
+    sh"""#!/bin/bash
+      set +e
+      git_clone_func https://github.com/alitariq4589/coremark.git
+      set -e
+    """
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
