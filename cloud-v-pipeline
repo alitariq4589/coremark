@@ -367,6 +367,6 @@
 //     cleanWs()
 //   }
 // }
-{
+Post:{
     build quietPeriod: 0, job: 'coremark', waitForStart: true
 }
