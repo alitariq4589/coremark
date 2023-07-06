@@ -367,6 +367,8 @@
 //     cleanWs()
 //   }
 // }
-Post:{
-    build quietPeriod: 0, job: 'coremark', waitForStart: true
+timeout(5){
+    Post:{
+        build quietPeriod: 0, job: 'coremark', waitForStart: true
+    }
 }
