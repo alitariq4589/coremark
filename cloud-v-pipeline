@@ -2,9 +2,9 @@ node ("sf1-1"){
   stage('*** Cleanup sf1-1 ***'){
     cleanWs()
   }
-  stage ('*** 30s Sleep ***'){
-    sleep(time:30,unit:"SECONDS")
-  }
+  //stage ('*** 30s Sleep ***'){
+  //  sleep(time:30,unit:"SECONDS")
+  //}
   stage('*** Checkout SCM sf1-1 ***'){
     sh"""#!/bin/bash
       echo \$(id)
