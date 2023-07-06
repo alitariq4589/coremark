@@ -367,3 +367,6 @@ node ("unleashed1-2"){
     cleanWs()
   }
 }
+finally{
+  build quietPeriod: 0, job: 'coremark', waitForStart: true
+}
