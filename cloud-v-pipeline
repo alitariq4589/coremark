@@ -7,7 +7,7 @@ node ("sf1-1"){
   }
   stage('*** Checkout SCM sf1-1 ***'){
     sh"""#!/bin/bash
-      echo $(id)
+      echo \$(id)
       source ~/.bashrc
       set +e
       git_clone_func https://github.com/alitariq4589/coremark.git
