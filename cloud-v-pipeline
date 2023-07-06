@@ -7,6 +7,7 @@ node ("sf1-1"){
   }
   stage('*** Checkout SCM sf1-1 ***'){
     sh"""#!/bin/bash
+      source ~/.bashrc
       set +e
       git_clone_func https://github.com/alitariq4589/coremark.git
       set -e
@@ -27,7 +28,6 @@ node ("sf1-1"){
   }
   stage ('*** Printing results to csv file sf1-1 ***'){
     sh"""#!/bin/bash
-      source ~/.bashrc
       # Printing to run1.csv
       echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
       # Printing to run2.csv
