@@ -11,6 +11,7 @@ node ("sf1-1"){
       set +e
       git_clone_func https://github.com/alitariq4589/coremark.git
       set -e
+      echo -n \$BUILD_NUMBER
     """
   }
   stage('*** make sf1-1 ***'){
