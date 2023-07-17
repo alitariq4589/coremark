@@ -15,14 +15,26 @@ node ("sf1-1"){
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf1-1 ***'){
@@ -64,14 +76,26 @@ node ("sf1-2"){
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf1-2 ***'){
@@ -112,7 +136,26 @@ node ("sf1-3"){
   }
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
-      make ITERATIONS=300000 CC=gcc PORT_DIR=linux/ RUN=
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
+        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 60 ]]] then
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 90 ]]] then
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
+      else
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf1-3 ***'){
@@ -157,14 +200,26 @@ node ("sf2-1"){
   }
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf2-1 ***'){
@@ -205,14 +260,26 @@ node ("sf2-2"){
   }
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf2-2 ***'){
@@ -253,14 +320,26 @@ node ("sf2-3"){
   }
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf2-3 ***'){
@@ -301,14 +380,26 @@ node ("sf2-4"){
   }
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results sf2-4 ***'){
@@ -349,14 +440,26 @@ node ("unleashed1-1"){
   }
   stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results unleashed1-1 ***'){
@@ -397,14 +500,26 @@ node ("unleashed1-2"){
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]]] then
+      if [[ \$BUILD_NUMBER -gt 10 ]]] then
+        make ITERATIONS=20000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]]] then
+        make ITERATIONS=50000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]]] then
+        make ITERATIONS=100000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]]] then
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]]] then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 60 ]]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 90 ]]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage ('*** Print Results unleashed1-2 ***'){
