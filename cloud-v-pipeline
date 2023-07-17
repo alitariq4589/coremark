@@ -35,6 +35,7 @@ node ("sf1-1"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf1-1 ***'){
@@ -96,6 +97,7 @@ node ("sf1-2"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf1-2 ***'){
@@ -156,6 +158,7 @@ node ("sf1-3"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf1-3 ***'){
@@ -220,6 +223,7 @@ node ("sf2-1"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf2-1 ***'){
@@ -280,6 +284,7 @@ node ("sf2-2"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf2-2 ***'){
@@ -340,6 +345,7 @@ node ("sf2-3"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf2-3 ***'){
@@ -400,6 +406,7 @@ node ("sf2-4"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results sf2-4 ***'){
@@ -460,6 +467,7 @@ node ("unleashed1-1"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results unleashed1-1 ***'){
@@ -520,6 +528,7 @@ node ("unleashed1-2"){
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=10000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
     """
   }
   stage ('*** Print Results unleashed1-2 ***'){
