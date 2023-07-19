@@ -40,10 +40,15 @@ node ("sf1-1"){
   }
   stage ('*** Print Results sf1-1 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-1 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-1 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf1-1 ***'){
@@ -102,10 +107,15 @@ node ("sf1-2"){
   }
   stage ('*** Print Results sf1-2 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-2 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-2 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf1-2 ***'){
@@ -163,14 +173,15 @@ node ("sf1-3"){
   }
   stage ('*** Print Results sf1-3 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 30 ]] then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]] then
-        make ITERATIONS=600000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]] then
-        make ITERATIONS=800000 CC=gcc PORT_DIR=linux/ RUN=
-      else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      
+      echo -e "[jenkinsfile INFO]: Printing run1.log for s1-3 single core"
+      echo "<====================================================================>"
+      cat run1.log
+      echo "<====================================================================>"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-3 single core"
+      echo "<====================================================================>"
+      cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf1-3 ***'){
@@ -228,10 +239,15 @@ node ("sf2-1"){
   }
   stage ('*** Print Results sf2-1 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-1 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-1 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf2-1 ***'){
@@ -289,10 +305,15 @@ node ("sf2-2"){
   }
   stage ('*** Print Results sf2-2 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-2 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-2 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf2-2 ***'){
@@ -350,10 +371,15 @@ node ("sf2-3"){
   }
   stage ('*** Print Results sf2-3 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-3 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-3 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf2-3 ***'){
@@ -411,10 +437,15 @@ node ("sf2-4"){
   }
   stage ('*** Print Results sf2-4 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-4 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-4 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file sf2-4 ***'){
@@ -472,11 +503,16 @@ node ("unleashed1-1"){
   }
   stage ('*** Print Results unleashed1-1 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for unleashed1-1 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for unleashed1-1 single core"
+      echo "<====================================================================>"
       cat run2.log
-    """
+      echo "<====================================================================>"
+      """
   }
   stage ('*** Printing results to csv file unleashed1-1 ***'){
     sh"""#!/bin/bash
@@ -533,10 +569,15 @@ node ("unleashed1-2"){
   }
   stage ('*** Print Results unleashed1-2 ***'){
     sh"""#!/bin/bash
+      
       echo -e "[jenkinsfile INFO]: Printing run1.log for unleashed1-2 single core"
+      echo "<====================================================================>"
       cat run1.log
+      echo "<====================================================================>"
       echo -e "[jenkinsfile INFO]: Printing run2.log for unleashed1-2 single core"
+      echo "<====================================================================>"
       cat run2.log
+      echo "<====================================================================>"
     """
   }
   stage ('*** Printing results to csv file unleashed1-2 ***'){
