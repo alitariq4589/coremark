@@ -6,12 +6,7 @@ node ("sf1-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
@@ -73,12 +68,7 @@ node ("sf1-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-2 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
@@ -139,12 +129,7 @@ node ("sf1-3"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-3 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
@@ -205,12 +190,7 @@ node ("sf2-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-1 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
@@ -271,12 +251,7 @@ node ("sf2-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-2 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
@@ -337,12 +312,7 @@ node ("sf2-3"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-3 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
@@ -403,12 +373,7 @@ node ("sf2-4"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-4 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
@@ -461,6 +426,69 @@ node ("sf2-4"){
   }
 }
 
+
+node ("sf2-5"){
+  stage('*** Cleanup sf2-5 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM sf2-5 ***'){
+    checkout scm
+  }
+  stage('*** make sf2-5 ***'){
+    sh"""#!/bin/bash
+      if [[ \$BUILD_NUMBER -gt 10 ]] then
+        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]] then
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]] then
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 60 ]] then
+        make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]] then
+        make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]] then
+        make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 90 ]] then
+        make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
+      else
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
+    """
+  }
+  stage ('*** Print Results sf2-5 ***'){
+    sh"""#!/bin/bash
+      
+      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-5 single core"
+      echo "<====================================================================>"
+      cat run1.log
+      echo "<====================================================================>"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-5 single core"
+      echo "<====================================================================>"
+      cat run2.log
+      echo "<====================================================================>"
+    """
+  }
+  stage ('*** Printing results to csv file sf2-5 ***'){
+    sh"""#!/bin/bash
+      # Printing to run1.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f2 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f3 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f4 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$3}' ./run2.log | cut -f5 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$3}' ./run2.log | cut -f6 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    """
+  }
+  stage('*** Cleanup sf2-5 ***'){
+    cleanWs()
+  }
+}
+
+
 node ("unleashed1-1"){
   stage('*** Cleanup unleashed1-1 ***'){
     cleanWs()
@@ -469,12 +497,7 @@ node ("unleashed1-1"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-1 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
@@ -535,12 +558,7 @@ node ("unleashed1-2"){
     sleep(time:30,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-2 ***'){
-    sh"""#!/bin/bash
-      source ~/.bash_aliases
-      set +e
-      git_clone_func https://github.com/alitariq4589/coremark.git
-      set -e
-    """
+    checkout scm
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
@@ -589,6 +607,67 @@ node ("unleashed1-2"){
     """
   }
   stage('*** Cleanup unleashed1-2 ***'){
+    cleanWs()
+  }
+}
+
+node ("dell5559"){
+  stage('*** Cleanup dell5559 ***'){
+    cleanWs()
+  }
+  stage ('*** 30s Sleep ***'){
+    sleep(time:30,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM dell5559 ***'){
+    checkout scm
+  }
+  stage('*** make dell5559 ***'){
+    sh"""#!/bin/bash
+      if [[ \$BUILD_NUMBER -gt 10 ]] then
+        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 20 ]] then
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 30 ]] then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 40 ]] then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 50 ]] then
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 60 ]] then
+        make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 70 ]] then
+        make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 80 ]] then
+        make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [[ \$BUILD_NUMBER -gt 90 ]] then
+        make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
+      else
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
+    """
+  }
+  stage ('*** Print Results dell5559 ***'){
+    sh"""#!/bin/bash
+      
+      echo -e "[jenkinsfile INFO]: Printing run1.log for dell5559 single core"
+      echo "<====================================================================>"
+      cat run1.log
+      echo "<====================================================================>"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for dell5559 single core"
+      echo "<====================================================================>"
+      cat run2.log
+      echo "<====================================================================>"
+    """
+  }
+  stage ('*** Printing results to csv file dell5559 ***'){
+    sh"""#!/bin/bash
+      # Printing to run1.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; echo -n "," >> ~/coremark_results/run1.log/run1.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1.csv
+      # Printing to run2.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f2 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f3 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$4}' ./run2.log | cut -f4 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$3}' ./run2.log | cut -f5 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; echo -n "," >> ~/coremark_results/run2.log/run2.csv; echo -n \$(awk '{print \$3}' ./run2.log | cut -f6 -d\$'\n') >> ~/coremark_results/run2.log/run2.csv; printf '%s\n' >> ~/coremark_results/run2.log/run2.csv
+    """
+  }
+  stage('*** Cleanup dell5559 ***'){
     cleanWs()
   }
 }
