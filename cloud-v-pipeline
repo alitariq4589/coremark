@@ -499,9 +499,9 @@ node ("unleashed1-1"){
   stage('*** Checkout SCM unleashed1-1 ***'){
     checkout scm
   }
-  stage('*** make unleashed1-1 ***'){
+    stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
-      if [[ \$BUILD_NUMBER -gt 10 ]] then
+      if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
       elif [[ \$BUILD_NUMBER -gt 20 ]] then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
