@@ -12,21 +12,21 @@ node ("sf1-1"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -74,21 +74,21 @@ node ("sf1-2"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -135,21 +135,21 @@ node ("sf1-3"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -196,21 +196,21 @@ node ("sf2-1"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -257,21 +257,21 @@ node ("sf2-2"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -318,21 +318,21 @@ node ("sf2-3"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -379,21 +379,21 @@ node ("sf2-4"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -441,21 +441,21 @@ node ("sf2-5"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -503,21 +503,21 @@ node ("unleashed1-1"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -564,21 +564,21 @@ node ("unleashed1-2"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
@@ -625,21 +625,21 @@ node ("dell5559"){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 10 ]; then
         make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 20 ]]; then
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
         make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 30 ]]; then
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
         make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 40 ]]; then
+      elif [ \$BUILD_NUMBER -gt 40 ]; then
         make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 50 ]]; then
+      elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 60 ]]; then
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 70 ]]; then
+      elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 80 ]]; then
+      elif [ \$BUILD_NUMBER -gt 80 ]; then
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [[ \$BUILD_NUMBER -gt 90 ]]; then
+      elif [ \$BUILD_NUMBER -gt 90 ]; then
         make ITERATIONS=200000000 CC=gcc PORT_DIR=linux/ RUN=
       else
         make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
