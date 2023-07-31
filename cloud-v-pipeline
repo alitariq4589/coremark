@@ -16,7 +16,7 @@ node ("sf1-1"){
         make ITERATIONS=100000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [ \$BUILD_NUMBER -gt 70 ]; then
         make ITERATIONS=50000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 60 ]; thenthen
+      elif [ \$BUILD_NUMBER -gt 60 ]; then
         make ITERATIONS=10000000 CC=gcc PORT_DIR=linux/ RUN=
       elif [ \$BUILD_NUMBER -gt 50 ]; then
         make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
