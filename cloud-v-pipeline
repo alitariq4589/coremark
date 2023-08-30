@@ -42,7 +42,7 @@ node ("sf1-1"){
       fi
     """
   }
-  stage('*** Printing Results ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 35 ]; then
         echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
