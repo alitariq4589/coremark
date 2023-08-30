@@ -21,7 +21,7 @@ node ("sf1-1"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -88,7 +88,7 @@ node ("sf1-2"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -154,7 +154,7 @@ node ("sf1-3"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -220,7 +220,7 @@ node ("sf2-1"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -286,7 +286,7 @@ node ("sf2-2"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -352,7 +352,7 @@ node ("sf2-3"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -418,7 +418,7 @@ node ("sf2-4"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -485,7 +485,7 @@ node ("sf2-5"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -552,7 +552,7 @@ node ("unleashed1-1"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -603,7 +603,7 @@ node ("unleashed1-2"){
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
