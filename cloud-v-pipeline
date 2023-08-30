@@ -25,23 +25,27 @@ node ("sf1-1"){
       fi
     """
   }
-  stage ('*** Print Results sf1-1 ***'){
+  stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-1 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-1 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
   stage ('*** Printing results to csv file sf1-1 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf1-1 ***'){
@@ -92,8 +96,8 @@ node ("sf1-2"){
   }
   stage ('*** Printing results to csv file sf1-2 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf1-2 ***'){
@@ -143,8 +147,8 @@ node ("sf1-3"){
   }
   stage ('*** Printing results to csv file sf1-3 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf1-3 ***'){
@@ -194,8 +198,8 @@ node ("sf2-1"){
   }
   stage ('*** Printing results to csv file sf2-1 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf2-1 ***'){
@@ -245,8 +249,8 @@ node ("sf2-2"){
   }
   stage ('*** Printing results to csv file sf2-2 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf2-2 ***'){
@@ -296,8 +300,8 @@ node ("sf2-3"){
   }
   stage ('*** Printing results to csv file sf2-3 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf2-3 ***'){
@@ -347,8 +351,8 @@ node ("sf2-4"){
   }
   stage ('*** Printing results to csv file sf2-4 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf2-4 ***'){
@@ -399,8 +403,8 @@ node ("sf2-5"){
   }
   stage ('*** Printing results to csv file sf2-5 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup sf2-5 ***'){
@@ -451,8 +455,8 @@ node ("unleashed1-1"){
   }
   stage ('*** Printing results to csv file unleashed1-1 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup unleashed1-1 ***'){
@@ -502,8 +506,8 @@ node ("unleashed1-2"){
   }
   stage ('*** Printing results to csv file unleashed1-2 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup unleashed1-2 ***'){
@@ -553,8 +557,8 @@ node ("dell5559"){
   }
   stage ('*** Printing results to csv file dell5559 ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOST.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk 'FNR == 2 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk 'FNR == 3 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk 'FNR == 4 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk 'FNR == 5 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOST.csv; echo -n \$(awk 'FNR == 6 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOST.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOST.csv
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 2 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 3 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 4 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 5 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 6 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
     """
   }
   stage('*** Cleanup dell5559 ***'){
