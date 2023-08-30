@@ -11,17 +11,17 @@ node ("sf1-1"){
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
