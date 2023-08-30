@@ -10,18 +10,18 @@ node ("sf1-1"){
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
+      if [ \$BUILD_NUMBER -gt 25 ]; then
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -77,38 +77,53 @@ node ("sf1-2"){
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf1-2 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf1-2 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-2 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf1-2 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf1-2 ***'){
@@ -128,38 +143,53 @@ node ("sf1-3"){
   }
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf1-3 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for s1-3 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf1-3 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf1-3 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf1-3 ***'){
@@ -179,38 +209,53 @@ node ("sf2-1"){
   }
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf2-1 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-1 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-1 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf2-1 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf2-1 ***'){
@@ -230,38 +275,53 @@ node ("sf2-2"){
   }
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf2-2 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-2 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-2 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf2-2 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf2-2 ***'){
@@ -281,38 +341,53 @@ node ("sf2-3"){
   }
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf2-3 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-3 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-3 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf2-3 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf2-3 ***'){
@@ -332,38 +407,53 @@ node ("sf2-4"){
   }
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf2-4 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-4 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-4 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf2-4 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf2-4 ***'){
@@ -384,38 +474,53 @@ node ("sf2-5"){
   }
   stage('*** make sf2-5 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results sf2-5 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for sf2-5 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for sf2-5 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file sf2-5 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup sf2-5 ***'){
@@ -436,18 +541,18 @@ node ("unleashed1-1"){
   }
     stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
@@ -487,38 +592,53 @@ node ("unleashed1-2"){
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
-      if [ \$BUILD_NUMBER -gt 35 ]; then
-        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 30 ]; then
-        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
-      elif [ \$BUILD_NUMBER -gt 25 ]; then
-        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      if [ \$BUILD_NUMBER -gt 25 ]; then
+        ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
-        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 15 ]; then
+        ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 10 ]; then
+        ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
-        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+        ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
-        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+        mark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
   }
-  stage ('*** Print Results unleashed1-2 ***'){
+  stage('*** Printing Results ***'){
     sh"""#!/bin/bash
-      
-      echo -e "[jenkinsfile INFO]: Printing run1.log for unleashed1-2 single core"
-      echo "<====================================================================>"
-      cat run1.log
-      echo "<====================================================================>"
-      echo -e "[jenkinsfile INFO]: Printing run2.log for unleashed1-2 single core"
-      echo "<====================================================================>"
-      cat run2.log
-      echo "<====================================================================>"
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        cat ./coremark_no_multithread/8,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        cat ./coremark_no_multithread/4,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        cat ./coremark_no_multithread/2,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        cat ./coremark_no_multithread/1,000,000/run1.log
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        cat ./coremark_no_multithread/400,000/run1.log
+      else
+        cat ./coremark_no_multithread/200,000/run1.log
+      fi
     """
   }
-  stage ('*** Printing results to csv file unleashed1-2 ***'){
+  stage('*** Printing Results in file ***'){
     sh"""#!/bin/bash
-      # Printing to run1_\$HOSTNAME.csv
-      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/8,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/8,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/4,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/4,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/2,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/2,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/1,000,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/1,000,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/400,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/400,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      else
+        echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f2 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f3 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$4}' ./coremark_no_multithread/200,000/run1.log | cut -f4 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f5 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk '{print \$3}' ./coremark_no_multithread/200,000/run1.log | cut -f6 -d\$'\n') >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+      fi
     """
   }
   stage('*** Cleanup unleashed1-2 ***'){
@@ -555,7 +675,7 @@ node ("dell5559"){
   }
   stage ('*** Print Results dell5559 ***'){
     sh"""#!/bin/bash
-      
+
       echo -e "[jenkinsfile INFO]: Printing run1.log for dell5559 single core"
       echo "<====================================================================>"
       cat run1.log
@@ -573,6 +693,57 @@ node ("dell5559"){
     """
   }
   stage('*** Cleanup dell5559 ***'){
+    cleanWs()
+  }
+}
+
+node ("rasp4-1"){
+  stage('*** Cleanup rasp4-1 ***'){
+    cleanWs()
+  }
+  stage ('*** 3s Sleep ***'){
+    sleep(time:3,unit:"SECONDS")
+  }
+  stage('*** Checkout SCM rasp4-1 ***'){
+    checkout scm
+  }
+  stage('*** make rasp4-1 ***'){
+    sh"""#!/bin/bash
+      if [ \$BUILD_NUMBER -gt 35 ]; then
+        make ITERATIONS=8000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [ \$BUILD_NUMBER -gt 30 ]; then
+        make ITERATIONS=4000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [ \$BUILD_NUMBER -gt 25 ]; then
+        make ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [ \$BUILD_NUMBER -gt 20 ]; then
+        make ITERATIONS=1000000 CC=gcc PORT_DIR=linux/ RUN=
+      elif [ \$BUILD_NUMBER -gt 5 ]; then
+        make ITERATIONS=400000 CC=gcc PORT_DIR=linux/ RUN=
+      else
+        make ITERATIONS=200000 CC=gcc PORT_DIR=linux/ RUN=
+      fi
+    """
+  }
+  stage ('*** Print Results rasp4-1 ***'){
+    sh"""#!/bin/bash
+
+      echo -e "[jenkinsfile INFO]: Printing run1.log for dell5559 single core"
+      echo "<====================================================================>"
+      cat run1.log
+      echo "<====================================================================>"
+      echo -e "[jenkinsfile INFO]: Printing run2.log for dell5559 single core"
+      echo "<====================================================================>"
+      cat run2.log
+      echo "<====================================================================>"
+    """
+  }
+  stage ('*** Printing results to csv file rasp4-1 ***'){
+    sh"""#!/bin/bash
+      # Printing to run1_\$HOSTNAME.csv
+      echo -n \$BUILD_NUMBER >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 2 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 3 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 4 {print \$4}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 5 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n "," >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; echo -n \$(awk 'FNR == 6 {print \$3}' ./run1.log) >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv; printf '%s\n' >> ~/coremark_results/run1.log/run1_\$HOSTNAME.csv
+    """
+  }
+  stage('*** Cleanup rasp4-1 ***'){
     cleanWs()
   }
 }
