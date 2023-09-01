@@ -1,10 +1,10 @@
 2K performance run parameters for coremark.
 CoreMark Size    : 666
-Total ticks      : 61374084
-Total time (secs): 61.374084
-Iterations/Sec   : 3258.704439
+Total ticks      : 56818005
+Total time (secs): 56.818005
+Iterations/Sec   : 3520.010954
 Iterations       : 200000
-Compiler version : GCC10.5.0
+Compiler version : GCC13.1.0
 Compiler flags   : -O2 -DPERFORMANCE_RUN=1  -lrt
 Memory location  : Please put data memory location here
 			(e.g. code in flash, data on heap etc)
@@ -14,4 +14,4 @@ seedcrc          : 0xe9f5
 [0]crcstate      : 0x8e3a
 [0]crcfinal      : 0x4983
 Correct operation validated. See README.md for run and reporting rules.
-CoreMark 1.0 : 3258.704439 / GCC10.5.0 -O2 -DPERFORMANCE_RUN=1  -lrt / Heap
+CoreMark 1.0 : 3520.010954 / GCC13.1.0 -O2 -DPERFORMANCE_RUN=1  -lrt / Heap
