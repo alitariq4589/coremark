@@ -6,9 +6,8 @@ node ("sf1-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
-    def scmUrl=scm.getUserRemoteConfigs()[0].getUrl()
     sh'''
-      git clone "\$scmUrl"
+      git clone https://github.com/alitariq4589/coremark.git
     '''
   }
   stage('*** make sf1-1 ***'){
@@ -76,7 +75,9 @@ node ("sf1-2"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-2 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
@@ -142,7 +143,9 @@ node ("sf1-3"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-3 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
@@ -208,7 +211,9 @@ node ("sf2-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-1 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
@@ -274,7 +279,9 @@ node ("sf2-2"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-2 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
@@ -340,7 +347,9 @@ node ("sf2-3"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-3 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
@@ -406,7 +415,9 @@ node ("sf2-4"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-4 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
@@ -473,7 +484,9 @@ node ("sf2-5"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf2-5 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make sf2-5 ***'){
     sh"""#!/bin/bash
@@ -540,7 +553,9 @@ node ("unleashed1-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-1 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
     stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
@@ -591,7 +606,7 @@ node ("unleashed1-2"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-2 ***'){
-    checkout scm
+    git clone https://github.com/alitariq4589/coremark.git
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
@@ -657,7 +672,9 @@ node ("dell5559"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM dell5559 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make dell5559 ***'){
     sh"""#!/bin/bash
@@ -708,7 +725,9 @@ node ("rasp4-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM rasp4-1 ***'){
-    checkout scm
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make rasp4-1 ***'){
     sh"""#!/bin/bash
