@@ -7,7 +7,7 @@ node ("sf1-1"){
   }
   stage('*** Checkout SCM sf1-1 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf1-1 ***'){
@@ -76,7 +76,7 @@ node ("sf1-2"){
   }
   stage('*** Checkout SCM sf1-2 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf1-2 ***'){
@@ -144,7 +144,7 @@ node ("sf1-3"){
   }
   stage('*** Checkout SCM sf1-3 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf1-3 ***'){
@@ -212,7 +212,7 @@ node ("sf2-1"){
   }
   stage('*** Checkout SCM sf2-1 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf2-1 ***'){
@@ -280,7 +280,7 @@ node ("sf2-2"){
   }
   stage('*** Checkout SCM sf2-2 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf2-2 ***'){
@@ -348,7 +348,7 @@ node ("sf2-3"){
   }
   stage('*** Checkout SCM sf2-3 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf2-3 ***'){
@@ -416,7 +416,7 @@ node ("sf2-4"){
   }
   stage('*** Checkout SCM sf2-4 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf2-4 ***'){
@@ -485,7 +485,7 @@ node ("sf2-5"){
   }
   stage('*** Checkout SCM sf2-5 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make sf2-5 ***'){
@@ -554,7 +554,7 @@ node ("unleashed1-1"){
   }
   stage('*** Checkout SCM unleashed1-1 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
     stage('*** make unleashed1-1 ***'){
@@ -607,7 +607,7 @@ node ("unleashed1-2"){
   }
   stage('*** Checkout SCM unleashed1-2 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make unleashed1-2 ***'){
@@ -675,7 +675,7 @@ node ("dell5559"){
   }
   stage('*** Checkout SCM dell5559 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make dell5559 ***'){
@@ -728,7 +728,7 @@ node ("rasp4-1"){
   }
   stage('*** Checkout SCM rasp4-1 ***'){
     sh'''
-      git clone https://github.com/alitariq4589/coremark.git
+      git clone https://github.com/alitariq4589/coremark.git .
     '''
   }
   stage('*** make rasp4-1 ***'){
