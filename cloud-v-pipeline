@@ -6,7 +6,9 @@ node ("sf1-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
-    checkout scm
+    sh'''
+      git clone \$GIT_URL
+    '''
   }
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
