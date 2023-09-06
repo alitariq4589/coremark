@@ -606,7 +606,9 @@ node ("unleashed1-2"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM unleashed1-2 ***'){
-    git clone https://github.com/alitariq4589/coremark.git
+    sh'''
+      git clone https://github.com/alitariq4589/coremark.git
+    '''
   }
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
