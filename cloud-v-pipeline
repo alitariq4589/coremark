@@ -6,8 +6,9 @@ node ("sf1-1"){
     sleep(time:3,unit:"SECONDS")
   }
   stage('*** Checkout SCM sf1-1 ***'){
+    def scmUrl=scm.getUserRemoteConfigs()[0].getUrl()
     sh'''
-      git clone \$GIT_URL
+      git clone "\$scmUrl"
     '''
   }
   stage('*** make sf1-1 ***'){
