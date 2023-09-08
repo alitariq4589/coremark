@@ -13,16 +13,22 @@ node ("sf1-1"){
   stage('*** make sf1-1 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -82,16 +88,22 @@ node ("sf1-2"){
   stage('*** make sf1-2 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -150,16 +162,22 @@ node ("sf1-3"){
   stage('*** make sf1-3 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -218,16 +236,22 @@ node ("sf2-1"){
   stage('*** make sf2-1 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -286,16 +310,22 @@ node ("sf2-2"){
   stage('*** make sf2-2 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -354,16 +384,22 @@ node ("sf2-3"){
   stage('*** make sf2-3 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -422,16 +458,22 @@ node ("sf2-4"){
   stage('*** make sf2-4 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -491,16 +533,22 @@ node ("sf2-5"){
   stage('*** make sf2-5 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -560,16 +608,22 @@ node ("unleashed1-1"){
     stage('*** make unleashed1-1 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
@@ -628,16 +682,22 @@ node ("unleashed1-2"){
   stage('*** make unleashed1-2 ***'){
     sh"""#!/bin/bash
       if [ \$BUILD_NUMBER -gt 25 ]; then
+        echo "[INFO]: Executing for 8,000,000 iterations"
         ./coremark_no_multithread/8,000,000/coremark 0x0 0x0 0x66 8000000 7 1 2000 > ./coremark_no_multithread/8,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 20 ]; then
+        echo "[INFO]: Executing for 4,000,000 iterations"
         ./coremark_no_multithread/4,000,000/coremark 0x0 0x0 0x66 4000000 7 1 2000 > ./coremark_no_multithread/4,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 15 ]; then
+        echo "[INFO]: Executing for 2,000,000 iterations"
         ./coremark_no_multithread/2,000,000/coremark 0x0 0x0 0x66 2000000 7 1 2000 > ./coremark_no_multithread/2,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 10 ]; then
+        echo "[INFO]: Executing for 1,000,000 iterations"
         ./coremark_no_multithread/1,000,000/coremark 0x0 0x0 0x66 1000000 7 1 2000 > ./coremark_no_multithread/1,000,000/run1.log
       elif [ \$BUILD_NUMBER -gt 5 ]; then
+        echo "[INFO]: Executing for 400,000 iterations"
         ./coremark_no_multithread/400,000/coremark 0x0 0x0 0x66 400000 7 1 2000 > ./coremark_no_multithread/400,000/run1.log
       else
+        echo "[INFO]: Executing for 200,000 iterations"
         ./coremark_no_multithread/200,000/coremark 0x0 0x0 0x66 200000 7 1 2000 > ./coremark_no_multithread/200,000/run1.log
       fi
     """
