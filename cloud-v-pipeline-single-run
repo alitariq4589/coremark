@@ -19,7 +19,7 @@ node ("J-VF1-1"){
   }
   stage('*** make J-VF1-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF1-1 ***'){
@@ -50,7 +50,7 @@ node ("J-VF1-2"){
   }
   stage('*** make J-VF1-2 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF1-2 ***'){
@@ -81,7 +81,7 @@ node ("J-VF1-3"){
   }
   stage('*** make J-VF1-3 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF1-3 ***'){
@@ -112,7 +112,7 @@ node ("J-VF2-1"){
   }
   stage('*** make J-VF2-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-1 ***'){
@@ -143,7 +143,7 @@ node ("J-VF2-2"){
   }
   stage('*** make J-VF2-2 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-2 ***'){
@@ -174,7 +174,7 @@ node ("J-VF2-3"){
   }
   stage('*** make J-VF2-3 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-3 ***'){
@@ -205,7 +205,7 @@ node ("J-VF2-4"){
   }
   stage('*** make J-VF2-4 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-4 ***'){
@@ -236,7 +236,7 @@ node ("J-VF2-5"){
   }
   stage('*** make J-VF2-5 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-5 ***'){
@@ -267,7 +267,7 @@ node ("J-VF2-6"){
   }
   stage('*** make J-VF2-6 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-VF2-6 ***'){
@@ -298,7 +298,7 @@ node ("J-HF-1"){
   }
   stage('*** make J-HF-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-HF-1 ***'){
@@ -329,7 +329,7 @@ node ("J-RASP4-1"){
   }
   stage('*** make J-RASP4-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-RASP4-1 ***'){
@@ -360,7 +360,7 @@ node ("J-TESTVM-1"){
   }
   stage('*** make J-TESTVM-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-TESTVM-1 ***'){
@@ -391,7 +391,7 @@ node ("J-QMU-1"){
   }
   stage('*** make J-QMU-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-QMU-1 ***'){
@@ -422,7 +422,7 @@ node ("J-QMS-1"){
   }
   stage('*** make J-QMS-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-QMS-1 ***'){
@@ -453,7 +453,7 @@ node ("J-K230-1"){
   }
   stage('*** make J-K230-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results J-K230-1 ***'){
@@ -484,7 +484,7 @@ node ("J-BPF3-1"){
   }
   stage('*** make BPF3-1 ***'){
     sh"""#!/bin/bash
-      make -j$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
+      make -j\$(nproc) ITERATIONS=2000000 CC=gcc PORT_DIR=linux/ RUN=
     """
   }
   stage('*** Printing Results BPF3-1 ***'){
